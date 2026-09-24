@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Digital Wedding Invitation - Interactive animated invitation card">
+  <meta property="og:title" content="Meghana &amp; Sai Prabhu — Wedding Invitation">
+  <meta property="og:description" content="Join Meghana and Sai Prabhu for their wedding celebration.">
+  <meta property="og:image" content="assets/images/AVR_1664.webp">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/jpeg" href="assets/images/icon.jpg">
+  <title>Wedding Invitation</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css?v=1.4">
+</head>
+<body class="envelope-active" data-theme="wine-gold">
+
+  <!-- Background Canvas for Ambient Petals & Particles -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- FLOATING CONTROLS GROUP (Visible on opening envelope screen & entire site) -->
+  <div class="floating-controls-group" role="region" aria-label="Floating Invitation Controls">
+    
+    <!-- Theme Color Palette Picker Control -->
+    <div id="theme-control" class="theme-control-wrapper">
+      <button id="theme-toggle-btn" class="floating-icon-btn" aria-label="Customize Invitation Theme Color Palette" title="Choose Theme Color">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+          <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.74 1.7-1.67 0-.44-.19-.88-.49-1.22-.3-.34-.47-.79-.47-1.27 0-1.1.9-2 2-2h2.35c3.67 0 6.65-2.98 6.65-6.65C22 5.84 17.5 2 12 2z"/>
+        </svg>
+        <span class="btn-tooltip">THEMES</span>
+      </button>
+
+      <!-- Theme Selector Popover Menu -->
+      <div id="theme-popover" class="theme-popover-menu hidden-popover">
+        <div class="theme-popover-header">
+          <span>CHOOSE THEME COLOR</span>
+        </div>
+        <div class="theme-options-grid">
+          <button class="theme-swatch" data-theme-id="emerald-gold" title="Imperial Emerald &amp; Gold">
+            <span class="swatch-color" style="background: linear-gradient(135deg, #051a14 50%, #D4AF37 50%);"></span>
+            <span class="swatch-name">Emerald &amp; Gold</span>
+          </button>
+          <button class="theme-swatch active" data-theme-id="wine-gold" title="Royal Wine &amp; Gold">
+            <span class="swatch-color" style="background: linear-gradient(135deg, #16070d 50%, #D4AF37 50%);"></span>
+            <span class="swatch-name">Wine &amp; Gold</span>
+          </button>
+          <button class="theme-swatch" data-theme-id="sapphire-rose" title="Midnight Sapphire &amp; Rose Gold">
+            <span class="swatch-color" style="background: linear-gradient(135deg, #071226 50%, #E89DA2 50%);"></span>
+            <span class="swatch-name">Sapphire &amp; Rose</span>
+          </button>
+          <button class="theme-swatch" data-theme-id="crimson-gold" title="Royal Crimson &amp; Gold">
+            <span class="swatch-color" style="background: linear-gradient(135deg, #1f0505 50%, #E5A93C 50%);"></span>
+            <span class="swatch-name">Crimson &amp; Gold</span>
+          </button>
+          <button class="theme-swatch" data-theme-id="plum-platinum" title="Plum Velvet &amp; Platinum">
+            <span class="swatch-color" style="background: linear-gradient(135deg, #160621 50%, #D1D5DB 50%);"></span>
+            <span class="swatch-name">Plum &amp; Platinum</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Music Control UI (Visual Only) -->
+    <div id="music-control" class="music-control-wrapper">
+      <button id="music-toggle-btn" class="music-btn" aria-label="Play Background Music" title="Toggle Music">
+        <div class="equalizer-bars" id="equalizer-bars">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+          <span class="bar bar-4"></span>
+        </div>
+        <span class="music-btn-label" id="music-status-text">PAUSED</span>
+      </button>
+    </div>
+
+    <button id="share-invitation-btn" class="floating-icon-btn" aria-label="Share Wedding Invitation" title="Share Invitation">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="18" cy="5" r="3"></circle>
+        <circle cx="6" cy="12" r="3"></circle>
+        <circle cx="18" cy="19" r="3"></circle>
+        <line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line>
+        <line x1="15.4" y1="6.5" x2="8.6" y2="10.5"></line>
+      </svg>
+      <span class="btn-tooltip">SHARE</span>
+    </button>
+
+  </div>
+
+  <!-- 1. OPENING SCREEN WITH ANIMATED ENVELOPE -->
+  <section id="opening-screen" class="opening-screen-overlay" role="dialog" aria-label="Wedding Envelope Opening Screen">
+    <div class="opening-ambient-glow" aria-hidden="true"></div>
+    
+    <div class="envelope-container">
+      <div class="envelope-wrapper" id="envelope-wrapper" tabindex="0" role="button" aria-label="Interactive Wedding Envelope. Click Open Invitation to view.">
+        
+        <!-- Envelope Back Interior -->
+        <div class="envelope-back"></div>
+
+        <!-- Envelope Inner Card -->
+        <div class="envelope-inner-card" id="envelope-card">
+          <div class="inner-card-border">
+            <div class="inner-card-header-icon">
+              <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5 L61 35 L95 35 L68 55 L78 88 L50 68 L22 88 L32 55 L5 35 L39 35 Z" fill="url(#gold-grad-inner)" stroke="var(--gold-primary)" stroke-width="1.5"/>
+                <defs>
+                  <linearGradient id="gold-grad-inner" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="var(--gold-light)"/>
+                    <stop offset="50%" stop-color="var(--gold-primary)"/>
+                    <stop offset="100%" stop-color="var(--gold-dark)"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <p class="inner-card-subtitle">YOU ARE CORDIALLY INVITED TO THE WEDDING OF</p>
+            <h2 class="inner-card-names">
+              <span data-config="brideName">BRIDE NAME</span>
+              <span class="inner-card-amp">&amp;</span>
+              <span data-config="groomName">GROOM NAME</span>
+            </h2>
+            <div class="inner-card-divider"></div>
+            <p class="inner-card-date" data-config="displayDate">WEDDING DATE</p>
+          </div>
+        </div>
+
+        <!-- Envelope Front Pocket -->
+        <div class="envelope-front">
+          <div class="envelope-front-pattern"></div>
+        </div>
+
+        <!-- Envelope 3D Top Flap -->
+        <div class="envelope-top-flap" id="envelope-flap">
+          <div class="flap-inner-pattern"></div>
+        </div>
+
+        <!-- Wax Seal Badge -->
+        <div class="wax-seal" id="wax-seal" aria-hidden="true">
+          <div class="wax-seal-inner">
+            <svg class="wax-seal-icon" viewBox="0 0 100 100" width="44" height="44">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="var(--gold-light)" stroke-width="2" stroke-dasharray="4 2"/>
+              <path d="M50 15 C55 35 65 45 85 50 C65 55 55 65 50 85 C45 65 35 55 15 50 C35 45 45 35 50 15 Z" fill="var(--gold-light)"/>
+            </svg>
+            <span class="wax-seal-initials">W</span>
+          </div>
+        </div>
+
+      </div> <!-- /envelope-wrapper -->
+
+      <!-- BUTTONS CONTAINER -->
+      <div class="open-btn-container">
+        <button id="open-invitation-btn" class="btn-royal-gold" aria-label="Open Wedding Invitation">
+          <span class="btn-text">OPEN INVITATION</span>
+          <span class="btn-shine"></span>
+        </button>
+
+        <button id="continue-invitation-btn" class="btn-royal-gold hidden-continue-btn" aria-label="Continue to Full Invitation">
+          <span class="btn-text">CONTINUE TO INVITATION &darr;</span>
+          <span class="btn-shine"></span>
+        </button>
+      </div>
+
+    </div> <!-- /envelope-container -->
+  </section>
+
+
+  <!-- FLOATING NAVIGATION (Appears after scroll) -->
+  <header id="floating-nav" class="floating-nav-bar hidden-nav" aria-label="Invitation Main Navigation">
+    <nav class="nav-container">
+      <div class="nav-monogram"><span data-config="brideName">B</span> &amp; <span data-config="groomName">G</span></div>
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link">HOME</a></li>
+        <li><a href="#events" class="nav-link">EVENTS</a></li>
+        <li><a href="#gallery" class="nav-link">GALLERY</a></li>
+        <li><a href="#venue" class="nav-link">VENUE</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!-- MAIN INVITATION CONTENT WRAPPER -->
+  <main id="main-invitation" class="main-invitation-content">
+    <!-- 3. MAIN HERO SECTION -->
+    <section id="hero" class="invitation-section hero-section">
+      <div class="section-container hero-container">
+        
+        <!-- Royal Header Ornament SVG -->
+        <div class="royal-ornament hero-ornament-top" aria-hidden="true">
+          <svg width="180" height="40" viewBox="0 0 180 40" fill="none">
+            <path d="M10 20 H70 M110 20 H170" stroke="url(#gold-line)" stroke-width="1.5"/>
+            <circle cx="90" cy="20" r="12" stroke="var(--gold-primary)" stroke-width="1.5" fill="none"/>
+            <circle cx="90" cy="20" r="6" fill="var(--gold-primary)"/>
+            <path d="M75 20 L80 15 L85 20 L80 25 Z M95 20 L100 15 L105 20 L100 25 Z" fill="var(--gold-primary)"/>
+            <defs>
+              <linearGradient id="gold-line" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="transparent"/>
+                <stop offset="50%" stop-color="var(--gold-primary)"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <p class="hero-tagline">TOGETHER WITH THEIR FAMILIES</p>
+        
+        <h1 class="hero-couple-names">
+          <span class="name-bride" data-config="brideName">BRIDE NAME</span>
+          <span class="name-ampersand">&amp;</span>
+          <span class="name-groom" data-config="groomName">GROOM NAME</span>
+        </h1>
+
+        <div class="hero-title-separator" aria-hidden="true">
+          <span class="sep-line"></span>
+          <span class="sep-diamond">◆</span>
+          <span class="sep-line"></span>
+        </div>
+
+        <h2 class="hero-subtitle">WEDDING INVITATION</h2>
+        <p class="hero-scroll-hint">Scroll down to explore the celebration</p>
+        
+        <div class="scroll-arrow-down" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" stroke-width="2">
+            <path d="M7 10l5 5 5-5"/>
+          </svg>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- 4. INVITATION MESSAGE SECTION -->
+    <section id="message" class="invitation-section message-section reveal-on-scroll">
+      <div class="section-container">
+        <div class="glass-card message-card">
+          <div class="card-corner-ornament top-left" aria-hidden="true"></div>
+          <div class="card-corner-ornament top-right" aria-hidden="true"></div>
+          <div class="card-corner-ornament bottom-left" aria-hidden="true"></div>
+          <div class="card-corner-ornament bottom-right" aria-hidden="true"></div>
+
+          <h3 class="section-title">OUR INVITATION</h3>
+          <div class="section-gold-divider"></div>
+          
+          <p class="message-text" data-config="invitationMessage">
+            YOUR INVITATION MESSAGE
+          </p>
+
+          <p class="message-subtext">
+            We invite you to celebrate our love and join us as we embark on this sacred journey of togetherness, joy, and lifelong happiness.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 5. WEDDING DATE & 6. COUNTDOWN SECTION -->
+    <section id="date-countdown" class="invitation-section countdown-section reveal-on-scroll">
+      <div class="section-container">
+        
+        <div class="date-card glass-card">
+          <div class="date-card-icon" aria-hidden="true">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" stroke-width="1.5">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <p class="date-card-label">THE WEDDING DAY</p>
+          <h3 class="date-card-value" data-config="displayDate">WEDDING DATE</h3>
+        </div>
+
+        <!-- COUNTDOWN TIMER COMPONENT -->
+        <div class="countdown-wrapper">
+          <h4 class="countdown-title">COUNTDOWN TO THE CELEBRATION</h4>
+          
+          <div class="countdown-timer" id="countdown-timer" aria-live="polite">
+            <div class="timer-box">
+              <span class="timer-number" id="cd-days">00</span>
+              <span class="timer-label">DAYS</span>
+            </div>
+            <div class="timer-colon">:</div>
+            <div class="timer-box">
+              <span class="timer-number" id="cd-hours">00</span>
+              <span class="timer-label">HOURS</span>
+            </div>
+            <div class="timer-colon">:</div>
+            <div class="timer-box">
+              <span class="timer-number" id="cd-minutes">00</span>
+              <span class="timer-label">MINUTES</span>
+            </div>
+            <div class="timer-colon">:</div>
+            <div class="timer-box">
+              <span class="timer-number" id="cd-seconds">00</span>
+              <span class="timer-label">SECONDS</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- 7. EVENTS TIMELINE SECTION (2 Events) -->
+    <section id="events" class="invitation-section events-section">
+      <div class="section-container">
+        <h3 class="section-title text-center">EVENTS TIMELINE</h3>
+        <p class="section-subtitle text-center">Join us for every magical moment</p>
+        <div class="section-gold-divider center-divider"></div>
+
+        <!-- First timeline event -->
+        <div class="events-timeline" id="events-timeline-container">
+          <!-- Populated dynamically via JS INVITATION_CONFIG -->
+        </div>
+      </div>
+    </section>
+
+    <section id="event-02" class="invitation-section events-section">
+      <div class="section-container">
+        <h3 class="section-title text-center">EVENT 02</h3>
+        <p class="section-subtitle text-center">Continue the celebration</p>
+        <div class="section-gold-divider center-divider"></div>
+        <div class="events-timeline" id="event-02-container">
+          <!-- Populated dynamically via JS INVITATION_CONFIG -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 8. PHOTO GALLERY SECTION -->
+    <section id="gallery" class="invitation-section gallery-section">
+      <div class="section-container">
+        <h3 class="section-title text-center">PHOTO GALLERY</h3>
+        <p class="section-subtitle text-center">Moments &amp; Memories</p>
+        <div class="section-gold-divider center-divider"></div>
+
+        <!-- First gallery row -->
+        <div class="gallery-grid" id="gallery-grid-container">
+          <!-- Populated dynamically via JS INVITATION_CONFIG -->
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery-row-2" class="invitation-section gallery-section">
+      <div class="section-container">
+        <h3 class="section-title text-center">MEMORIES</h3>
+        <p class="section-subtitle text-center">More moments to treasure</p>
+        <div class="section-gold-divider center-divider"></div>
+        <div class="gallery-grid" id="gallery-row-2-container">
+          <!-- Populated dynamically via JS INVITATION_CONFIG -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 9. VENUE SECTION -->
+    <section id="venue" class="invitation-section venue-section reveal-on-scroll">
+      <div class="section-container">
+        <div class="glass-card venue-card">
+          <div class="venue-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" stroke-width="1.5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+
+          <h3 class="section-title">THE VENUE</h3>
+          <div class="section-gold-divider"></div>
+
+          <h4 class="venue-name" data-config="venue.name">VENUE NAME</h4>
+          <p class="venue-address" data-config="venue.address">VENUE ADDRESS</p>
+
+          <div class="venue-action">
+            <a href="#" id="venue-map-btn" class="btn-royal-gold btn-outline" data-config-href="venue.googleMapsUrl" target="_blank" rel="noopener noreferrer" aria-label="View Location on Google Maps">
+              <span class="btn-text">VIEW LOCATION</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 11. FINAL THANK YOU SECTION -->
+    <section id="thank-you" class="invitation-section thank-you-section reveal-on-scroll">
+      <div class="section-container text-center">
+        
+        <div class="royal-ornament" aria-hidden="true">
+          <svg width="120" height="30" viewBox="0 0 120 30" fill="none">
+            <path d="M10 15 H45 M75 15 H110" stroke="var(--gold-primary)" stroke-width="1"/>
+            <circle cx="60" cy="15" r="8" stroke="var(--gold-primary)" stroke-width="1.5" fill="none"/>
+            <circle cx="60" cy="15" r="4" fill="var(--gold-primary)"/>
+          </svg>
+        </div>
+
+        <h2 class="thank-you-title">THANK YOU</h2>
+        <p class="thank-you-message">We look forward to celebrating this special day with you!</p>
+
+        <p class="thank-you-signature">
+          <span data-config="brideName">BRIDE NAME</span> &amp; <span data-config="groomName">GROOM NAME</span>
+        </p>
+
+
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- GALLERY LIGHTBOX MODAL (For SVG/CSS Placeholders) -->
+  <div id="gallery-lightbox" class="lightbox-modal" role="dialog" aria-hidden="true" aria-label="Photo Gallery Lightbox Modal">
+    <div class="lightbox-overlay" id="lightbox-overlay"></div>
+    <div class="lightbox-content">
+      <button id="lightbox-close-btn" class="lightbox-close" aria-label="Close Lightbox Modal">&times;</button>
+      <div class="lightbox-body" id="lightbox-body">
+        <!-- Injected dynamically -->
+      </div>
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+
+  <!-- STATUS NOTIFICATION -->
+  <div id="site-toast" class="toast-notification" role="status" aria-live="polite">
+    <div class="toast-content">
+      <span class="toast-icon">✨</span>
+      <span id="toast-message">Selection noted.</span>
+    </div>
+  </div>
+
+
+  <!-- Main Script -->
+  <script src="js/script.js?v=1.4"></script>
+</body>
+</html>
