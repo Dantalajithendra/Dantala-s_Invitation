@@ -267,6 +267,7 @@ function initEnvelopeState() {
     openingScreen.classList.add('fade-out');
     document.body.classList.remove('envelope-active');
     mainContent.classList.add('is-visible');
+    document.dispatchEvent(new CustomEvent('invitation:entered'));
     window.requestAnimationFrame(() => {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     });
@@ -613,6 +614,21 @@ function initMusicControl() {
     musicStatusText.textContent = playing ? "PLAYING" : "PAUSED";
     musicBtn.setAttribute('aria-label', playing ? 'Pause Background Music' : 'Play Background Music');
   };
+
+  const startMusic = async () => {
+    if (isPlaying) return;
+
+    try {
+      await audio.play();
+      updateMusicState(true);
+    } catch (error) {
+      if (error.name !== 'NotAllowedError') {
+        console.error('Unable to start invitation music:', error);
+      }
+    }
+  };
+
+  document.addEventListener('invitation:entered', startMusic, { once: true });
 
   musicBtn.addEventListener('click', async () => {
     if (isPlaying) {
