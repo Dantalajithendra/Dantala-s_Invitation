@@ -13,8 +13,8 @@
 const INVITATION_CONFIG = {
   brideName: "Meghana",
   groomName: "Sai Prabhu",
-  weddingDate: "2026-10-14T20:30:00",
-  displayDate: "WEDNESDAY, OCTOBER 14, 2026 • 8:30 PM",
+  weddingDate: "2026-10-14T20:36:00",
+  displayDate: "WEDNESDAY, OCTOBER 14, 2026 • 8:36 PM",
   invitationMessage: "Together with their families, cordially invite you to celebrate the holy wedding union of Meghana & Sai Prabhu.",
   venue: {
     name: "Sri Rama Palace Function Hall",
@@ -37,7 +37,7 @@ const INVITATION_CONFIG = {
       number: "02",
       name: "Sumuhurtham",
       date: "OCTOBER 14, 2026",
-      time: "8:30 PM (Sumuhurtham)",
+      time: "8:36 PM (Sumuhurtham)",
       location: "Sri Rama Palace Function Hall (Beside Hotel Ilapuram)",
       description: "The auspicious main wedding ceremony and holy union of Meghana & Sai Prabhu."
     }
@@ -161,7 +161,7 @@ function renderGalleryGrid() {
     return `
       <div class="gallery-card reveal-on-scroll ${hasImg ? 'has-real-img' : ''}" data-gallery-id="${item.id}" style="${item.gradient ? 'background: ' + item.gradient : ''}" role="button" tabindex="0" aria-label="View ${escapeHTML(item.title)}">
         ${hasImg ? `
-          <img src="${escapeHTML(item.imgSrc)}" alt="${escapeHTML(item.title)}" class="gallery-card-img image-loading" loading="lazy" />
+          <img src="${escapeHTML(item.imgSrc)}" alt="${escapeHTML(item.title)}" class="gallery-card-img image-loading" loading="eager" decoding="async" />
           <span class="gallery-image-loader" aria-label="Loading image"></span>
         ` : `
           <div class="gallery-card-inner-svg">
@@ -341,7 +341,7 @@ function resizeCanvas() {
 }
 
 function createParticle(x, y, isBurst = false) {
-  const currentTheme = document.body.getAttribute('data-theme') || 'wine-gold';
+  const currentTheme = document.body.getAttribute('data-theme') || 'emerald-gold';
   let pColor;
 
   if (currentTheme === 'emerald-gold') {
