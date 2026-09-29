@@ -39,7 +39,7 @@ const INVITATION_CONFIG = {
       date: "OCTOBER 14, 2026",
       time: "8:36 PM (Sumuhurtham)",
       location: "Sri Rama Palace Function Hall (Beside Hotel Ilapuram)",
-      description: "The auspicious main wedding ceremony and holy union of Meghana & Sai Prabhu."
+      description: "The auspicious main wedding ceremony and holy union of Meghana & Sai Prabhu. Followed by lunch."
     }
   ],
   gallery: [
@@ -659,6 +659,20 @@ function initMusicControl() {
   audio.addEventListener('ended', () => {
     updateMusicState(false);
   });
+
+  const stopMusicWhenLeaving = () => {
+    if (!audio.paused) {
+      audio.pause();
+      updateMusicState(false);
+    }
+  };
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      stopMusicWhenLeaving();
+    }
+  });
+  window.addEventListener('pagehide', stopMusicWhenLeaving);
 }
 
 function showToast(message) {
@@ -715,13 +729,8 @@ function initSectionNavigation() {
   let touchStartY = null;
   let touchStartX = null;
 
-  const getNavHeight = () => {
-    const nav = document.getElementById('floating-nav');
-    return nav ? nav.getBoundingClientRect().height : 0;
-  };
-
   const getCurrentSectionIndex = () => {
-    const targetTop = window.scrollY + getNavHeight() + 8;
+    const targetTop = window.scrollY;
     return sections.reduce((closestIndex, section, index) => {
       return Math.abs(section.offsetTop - targetTop) <
         Math.abs(sections[closestIndex].offsetTop - targetTop)
@@ -737,17 +746,18 @@ function initSectionNavigation() {
       return;
     }
 
+    const currentIndex = getCurrentSectionIndex();
     const nextIndex = Math.max(
       0,
-      Math.min(sections.length - 1, getCurrentSectionIndex() + direction)
+      Math.min(sections.length - 1, currentIndex + direction)
     );
-    if (nextIndex === getCurrentSectionIndex()) return;
+    if (nextIndex === currentIndex) return;
 
     isNavigating = true;
-    sections[nextIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.scrollTo({ top: sections[nextIndex].offsetTop, behavior: 'smooth' });
     window.setTimeout(() => {
       isNavigating = false;
-    }, 1650);
+    }, 1200);
   };
 
   document.addEventListener('wheel', (event) => {
