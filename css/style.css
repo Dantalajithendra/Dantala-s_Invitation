@@ -296,6 +296,11 @@ body.envelope-active {
   font-family: var(--font-body);
 }
 
+.inner-card-subtitle span,
+.inner-card-date span {
+  display: inline;
+}
+
 .inner-card-names {
   font-family: var(--font-heading);
   font-size: 0.85rem;
@@ -1547,19 +1552,23 @@ body.envelope-active {
   .section-title { font-size: 1.3rem; }
   .inner-card-header-icon svg { width: 30px; height: 30px; }
   .inner-card-subtitle {
-    width: 220px;
-    font-size: 0.5rem;
-    letter-spacing: 0.45px;
+    width: 210px;
+    font-size: 0.48rem;
+    letter-spacing: 0.35px;
     line-height: 1.35;
     white-space: normal;
+  }
+  .inner-card-subtitle span,
+  .inner-card-date span {
+    display: block;
   }
   .inner-card-names { font-size: 0.75rem; }
   .inner-card-amp { font-size: 0.95rem; }
   .inner-card-divider { margin: 2px 0; }
   .inner-card-date {
-    max-width: 220px;
-    font-size: 0.56rem;
-    letter-spacing: 0.35px;
+    max-width: 210px;
+    font-size: 0.54rem;
+    letter-spacing: 0.25px;
     white-space: normal;
     line-height: 1.35;
   }
