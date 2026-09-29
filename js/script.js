@@ -51,7 +51,7 @@ const INVITATION_CONFIG = {
     {
       id: 2,
       title: "MOMENT 02",
-      imgSrc: "assets/images/AVR_1741.webp"
+      imgSrc: "assets/images/AVR_1624.webp"
     },
     {
       id: 3,
@@ -61,7 +61,7 @@ const INVITATION_CONFIG = {
     {
       id: 4,
       title: "MOMENT 04",
-      imgSrc: "assets/images/AVR_1624.webp"
+      imgSrc: "assets/images/AVR_1741.webp"
     },
     {
       id: 5,
@@ -71,17 +71,17 @@ const INVITATION_CONFIG = {
     {
       id: 6,
       title: "MOMENT 06",
-      imgSrc: "assets/images/AVR_1907.webp"
+      imgSrc: "assets/images/AVR_1930.webp"
     },
     {
       id: 7,
       title: "MOMENT 07",
-      imgSrc: "assets/images/AVR_1930.webp"
+      imgSrc: "assets/images/AVR_1758.webp"
     },
     {
       id: 8,
       title: "MOMENT 08",
-      imgSrc: "assets/images/AVR_1758.webp"
+      imgSrc: "assets/images/AVR_1907.webp"
     }
   ]
 };
