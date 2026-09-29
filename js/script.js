@@ -39,7 +39,7 @@ const INVITATION_CONFIG = {
       date: "OCTOBER 14, 2026",
       time: "8:36 PM (Sumuhurtham)",
       location: "Sri Rama Palace Function Hall (Beside Hotel Ilapuram)",
-      description: "The auspicious main wedding ceremony and holy union of Meghana & Sai Prabhu. Followed by lunch."
+      description: "The auspicious main wedding ceremony and holy union of Meghana & Sai Prabhu. Followed by dinner."
     }
   ],
   gallery: [
@@ -50,7 +50,7 @@ const INVITATION_CONFIG = {
     },
     {
       id: 2,
-      title: "MOMENT 02",
+      title: "MOMENT 04",
       imgSrc: "assets/images/AVR_1741.webp"
     },
     {
@@ -60,7 +60,7 @@ const INVITATION_CONFIG = {
     },
     {
       id: 4,
-      title: "MOMENT 04",
+      title: "MOMENT 02",
       imgSrc: "assets/images/AVR_1624.webp"
     },
     {
@@ -70,17 +70,17 @@ const INVITATION_CONFIG = {
     },
     {
       id: 6,
-      title: "MOMENT 06",
+      title: "MOMENT 07",
       imgSrc: "assets/images/AVR_1907.webp"
     },
     {
       id: 7,
-      title: "MOMENT 07",
+      title: "MOMENT 08",
       imgSrc: "assets/images/AVR_1930.webp"
     },
     {
       id: 8,
-      title: "MOMENT 08",
+      title: "MOMENT 06",
       imgSrc: "assets/images/AVR_1758.webp"
     }
   ]

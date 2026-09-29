@@ -1202,7 +1202,7 @@ body.envelope-active {
    -------------------------------------------------------------------------- */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
   margin-top: 20px;
 }
@@ -1653,6 +1653,10 @@ body.envelope-active {
 
 /* Desktop Screens (min-width: 1024px) */
 @media (min-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .hero-couple-names { font-size: 3.2rem; }
   .name-ampersand { font-size: 3.6rem; }
   .envelope-wrapper { width: 380px; height: 260px; }
