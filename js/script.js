@@ -51,7 +51,7 @@ const INVITATION_CONFIG = {
     {
       id: 2,
       title: "MOMENT 02",
-      imgSrc: "assets/images/AVR_1624.webp"
+      imgSrc: "assets/images/moment-02-cropped.webp"
     },
     {
       id: 3,
@@ -71,7 +71,7 @@ const INVITATION_CONFIG = {
     {
       id: 6,
       title: "MOMENT 06",
-      imgSrc: "assets/images/AVR_1930.webp"
+      imgSrc: "assets/images/AVR_1907.webp"
     },
     {
       id: 7,
@@ -81,7 +81,7 @@ const INVITATION_CONFIG = {
     {
       id: 8,
       title: "MOMENT 08",
-      imgSrc: "assets/images/AVR_1907.webp"
+      imgSrc: "assets/images/AVR_1930.webp"
     }
   ]
 };
