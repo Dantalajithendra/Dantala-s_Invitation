@@ -1547,9 +1547,9 @@ body.envelope-active {
   .section-title { font-size: 1.3rem; }
   .inner-card-header-icon svg { width: 30px; height: 30px; }
   .inner-card-subtitle {
-    width: 190px;
-    font-size: 0.48rem;
-    letter-spacing: 0.6px;
+    width: 220px;
+    font-size: 0.5rem;
+    letter-spacing: 0.45px;
     line-height: 1.35;
     white-space: normal;
   }
@@ -1557,9 +1557,9 @@ body.envelope-active {
   .inner-card-amp { font-size: 0.95rem; }
   .inner-card-divider { margin: 2px 0; }
   .inner-card-date {
-    max-width: 190px;
-    font-size: 0.52rem;
-    letter-spacing: 0.5px;
+    max-width: 220px;
+    font-size: 0.56rem;
+    letter-spacing: 0.35px;
     white-space: normal;
     line-height: 1.35;
   }
