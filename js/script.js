@@ -61,17 +61,27 @@ const INVITATION_CONFIG = {
     {
       id: 4,
       title: "MOMENT 04",
-      imgSrc: "assets/images/AVR_1750.webp"
+      imgSrc: "assets/images/AVR_1624.webp"
     },
     {
       id: 5,
       title: "MOMENT 05",
-      imgSrc: "assets/images/AVR_1907.webp"
+      imgSrc: "assets/images/AVR_1750.webp"
     },
     {
       id: 6,
       title: "MOMENT 06",
+      imgSrc: "assets/images/AVR_1907.webp"
+    },
+    {
+      id: 7,
+      title: "MOMENT 07",
       imgSrc: "assets/images/AVR_1930.webp"
+    },
+    {
+      id: 8,
+      title: "MOMENT 08",
+      imgSrc: "assets/images/AVR_1758.webp"
     }
   ]
 };
@@ -182,10 +192,10 @@ function renderGalleryGrid() {
   const firstContainer = document.getElementById('gallery-grid-container');
   const secondContainer = document.getElementById('gallery-row-2-container');
   if (firstContainer) {
-    firstContainer.innerHTML = INVITATION_CONFIG.gallery.slice(0, 3).map(renderGalleryItem).join('');
+    firstContainer.innerHTML = INVITATION_CONFIG.gallery.slice(0, 4).map(renderGalleryItem).join('');
   }
   if (secondContainer) {
-    secondContainer.innerHTML = INVITATION_CONFIG.gallery.slice(3).map(renderGalleryItem).join('');
+    secondContainer.innerHTML = INVITATION_CONFIG.gallery.slice(4).map(renderGalleryItem).join('');
   }
 }
 
